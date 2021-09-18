@@ -1,0 +1,109 @@
+<% include ./_layouts/adminheader.ejs %>
+<main class="p-2" role="main">
+  <p class="cover-heading">Tell us a bit about your broker:</p>
+  <form method="post" role="form" data-toggle="validator" name="brokerconfirm" action="/brokerconfirm" id="form">
+<table class="table">
+<tbody>
+  <tr>  
+    <td>Broker in Charge *</td>
+    <td>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <input type="text" name="brokerage_name" value="<%=user.broker.brokerage_name%>" placeholder="Brokerage Name" required/>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 mb-3">
+              <input type="text" name="broker_first_name" value="<%=user.broker.first_name%>" placeholder="First Name" required/>
+          </div>
+
+
+        <div class="col-md-6 mb-3">
+            <input type="text" name="broker_last_name" value="<%=user.broker.last_name%>"  placeholder="Last Name" required/>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Broker in charge email *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="email" name="broker_email" id= "broker_email" value="<%=user.broker.email%>" placeholder="e-mail"  required/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Brokerage Phone Number *</td>
+    <td>
+    <div class="col-md-6 mb-3">
+        <input type="tel" name="broker_phone_number" value="<%=user.broker.phone_number%>" placeholder="Phone Number" required pattern=".{9,}"/>
+    </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Brokerage Address</td>
+    <td>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <input type="text" name="broker_address" value="<%=user.broker.address%>"  placeholder="Street Address"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <input type="text" name="broker_city" value="<%=user.broker.city%>" placeholder="City" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <input type="text" name="broker_state" value="<%=user.broker.state%>" placeholder="State" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <input type="text" name="broker_zip" value="<%=user.broker.zip%>" placeholder="Zip" />
+        </div>
+      </div>
+    </td>
+  </tr>
+
+</tbody>
+</table>
+<div class="row">
+  <div class="col-md-6 text-center">
+    <input type="button" class="btn btn-primary" value="Back" onclick="history.back(-1)" />
+  </div>
+  <div class="col-md-6 text-center">
+   <input type="submit" class="btn btn-primary" id='btnSubmit' name="submit" value="Submit"/>
+  </div>
+</div>
+</form>
+
+<script>
+$(document).ready(function() {
+  $('#btnSubmit').click(function(e) {
+    var sEmail = $('input[type=email]').val();
+    var emailElement = document.getElementById('broker_email');
+
+    if (validateEmail(sEmail)) {
+      console.log('valid email');
+
+      emailElement.setCustomValidity("");  
+      $('#form').submit();
+    } else {
+      console.log('invalid email');
+      emailElement.setCustomValidity('Please enter valid email');
+    }
+  });
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+
+});
+</script>
+
+</main>
+<% include ./_layouts/adminfooter.ejs %>
+

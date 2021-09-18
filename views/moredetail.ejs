@@ -1,0 +1,88 @@
+<% include ./_layouts/adminheader.ejs %>
+<main class="p-2" role="main">
+  <p class="cover-heading">A few more details about you…</p>
+  <form method="post" name="moredetail" action="/moredetail">
+<table class="table">
+<tbody>
+  <tr>  
+    <td>MLS System *</td>
+    <td>
+        <div class="col-md-6 mb-3">
+        <select name="mls_system" value="<%=user.subscriber.mls_system%>">
+          <%
+            user.mls_system_list.forEach((mls_system_data) => {
+              let mls_system_value = mls_system_data.ListingServices.description;
+          %>
+          <% if(mls_system_value == user.subscriber.mls_system) { %>
+          <option value="<%=mls_system_value%>" selected><%=mls_system_value%></option>
+          <% } else { %>
+          <option value="<%=mls_system_value%>"><%=mls_system_value%></option>
+          <%
+          }
+          });
+        %>
+       
+      </select>
+          
+        </div>
+
+    </td>
+  </tr>
+  <tr>
+    <td>MLS ID #</td>
+    <td>
+        <div class="col-md-6 mb-3">
+
+        <input type="text" name="mls_id" value="<%=user.subscriber.mls_id%>" required/>
+        </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Facebook Page URL</td>
+    <td>
+    <div class="col-md-6 mb-3">
+        <input type="text" name="page_url" value="<%=user.facebook.page_url%>" required/>
+    </div>
+    </td>
+  </tr>
+  
+</tbody>
+</table>
+<p id='mls_system_list' style="display:none"><%= JSON.stringify(user.mls_system_list) %></p>
+<input type="text"  style="display:none" name="vendor_id" id="vendor_id" value="<%= user.subscriber.mls_system %>"/>
+<div class="row">
+    <div class="col-md-5 text-center">
+        <input type ="checkbox" id="chk_check_legal" name="check_legal"/>
+        <label for="chk_check_legal">Check to acknowledge the legal stuff</label>
+    </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-6 text-center">
+   <input type="submit" class="btn btn-primary" name="submit" value="Finish"/>
+  </div>
+</div>
+</form>
+
+<script>
+$(document).ready(function() {
+  $('select').on('change', function() {
+    var mls_system_list = JSON.parse($('#mls_system_list').text());
+    var area = '';
+    mls_system_list.forEach((mls_system_data) => {
+       
+       var mls_system_value = mls_system_data.ListingServices.description;
+       if(this.value == mls_system_value) {
+         area = mls_system_data.ListingServices.area;
+       }
+    });
+
+    $('#vendor_id').val(area);
+  });
+});
+</script>
+
+</main>
+<% include ./_layouts/adminfooter.ejs %>
+

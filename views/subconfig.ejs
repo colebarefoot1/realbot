@@ -1,0 +1,153 @@
+<% include ./_layouts/adminheader.ejs %>
+<main class="p-2" role="main">
+  <h5 class="cover-heading">User Configration</h5>
+  <form method="post" name="subconfig" action="/subconfig">
+  <h6 class="cover-heading">Subscription Pages</h6>
+  <%
+    if(pages && pages.length > 0){
+      var index = 0;
+  %>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Page Name</th>
+        <th scope="col">Bot on Page</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%   pages.forEach((page) => {
+        index ++;
+  %>
+        <tr>
+          <th scope="row"><%=index%></th>
+          <td><%= page.name %></td>
+          <td><input type="checkbox"  name="checkboxList[]" value="<%= page.id %>" <%= page.pageChecked == true ? 'checked' : '' %> />&nbsp;</td>
+        </tr>
+  <%      
+      });
+  %>
+
+    </tbody>
+    </table>
+  <% } else { %>
+    No Page Available.
+  <% } %>
+
+<h6 class="cover-heading">Subscription Profile</h5>
+
+<table class="table">
+<tbody>
+  <tr>
+    <td>Bot Name *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="botname" value="<%=user.subscriber.botname%>" required/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Cell Phone Number(9 digits)*</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="tel" name="phone_number" value="<%=user.subscriber.phone_number%>" required pattern=".{9,}"/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>MLSID1*</td>
+    <td>
+    <div class="col-md-6 mb-3">
+      <input type="text" name="vendor_id" value="<%=user.subscriber.vendor_id%>" required/>
+    </div>
+   
+    </td>
+  </tr>
+  <tr>
+    <td>MLSID2*</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="agent_id" value="<%=user.subscriber.agent_id%>" required/>
+      </div>
+    </td>
+    
+  </tr>
+</tbody>
+</table>
+
+<h6 class="cover-heading">Broker in Charge</h5>
+
+<table class="table">
+<tbody>
+  <tr>
+    <td>First Name *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="broker_first_name" value="<%=user.broker.first_name%>" required/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+  <td>Last Name </td>
+  <td>
+    <div class="col-md-6 mb-3">
+      <input type="text" name="broker_last_name" value="<%=user.broker.last_name%>"/>
+    </div>
+  </td>
+</tr>
+
+  <tr>
+    <td>Address</td>
+    <td>
+    <div class="col-md-6 mb-3">
+      <input type="text" name="broker_address" value="<%=user.broker.address%>"/>
+    </div>
+   
+    </td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="broker_city" value="<%=user.broker.city%>"/>
+      </div>
+    </td>
+    
+  </tr>
+  <tr>
+    <td>State</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="broker_state" value="<%=user.broker.state%>"/>
+      </div>
+    </td>
+  
+  </tr>
+  <tr>
+  <td>Zip</td>
+  <td>
+    <div class="col-md-6 mb-3">
+      <input type="text" name="broker_zip" value="<%=user.broker.zip%>"/>
+    </div>
+  </td>
+
+  </tr>
+</tbody>
+</table>
+<div class="row">
+  <div class="col-md-12 text-center">
+   <input type="submit" class="btn btn-primary" name="submit" value="Submit"/>
+  </div>
+</div>
+</form>
+
+<script>
+$(document).ready(function() {
+  
+
+});
+</script>
+
+</main>
+<% include ./_layouts/adminfooter.ejs %>
+

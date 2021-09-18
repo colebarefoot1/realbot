@@ -1,0 +1,181 @@
+<% include ./_layouts/adminheader.ejs %>
+<main class="p-2" role="main">
+<div class="container">
+  <h5 class="cover-heading">Dashboard</h5>
+  <div class="row">
+    <div class="col-md-12">
+      
+      <%
+       if(usersData && usersData.length > 0){
+         var index = 0;
+      %>
+      <div class="table-responsive">
+      <table class="table table-striped table-bordered"   id="usertable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">User FName</th>
+          <th scope="col">User LName</th>
+          <th scope="col">User Email</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%   
+            usersData.forEach((userData) => {
+            index ++;
+      %>
+            <tr>
+              <th scope="row"><%=index%></th>
+              <td><%= userData.facebook.first_name %></td>
+              <td><%= userData.facebook.last_name %></td>
+              <td><%= userData.facebook.email %></td>
+            </tr>
+      <%      
+          });
+      %>
+      </tbody>
+    </table>
+    </div>
+    <% } else { %>
+      No User Available.
+    <% } %>
+    </div>
+  </div>
+
+  <h6 class="cover-heading">Subscription Profile</h5>
+  <div class="row">
+    <div class="col-md-12">
+  <table class="table">
+  <tbody>
+    <tr>
+        
+    <td>Subscriber Name</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <%=user.facebook.name? user.facebook.name : 'User'%>
+      </div>
+    </td>
+  </tr>
+    <tr>
+      
+      <td>Bot Name</td>
+      <td>
+        <div class="col-md-6 mb-3">
+          <%=user.subscriber.botname%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Cell Phone Number</td>
+      <td>
+        <div class="col-md-6 mb-3">
+          <%=user.subscriber.phone_number%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>MLSID1</td>
+      <td>
+      <div class="col-md-6 mb-3">
+        <%=user.subscriber.vendor_id%>
+      </div>
+     
+      </td>
+    </tr>
+    <tr>
+      <td>MLSID2</td>
+      <td>
+        <div class="col-md-6 mb-3">
+          <%=user.subscriber.agent_id%>
+        </div>
+      </td>
+      
+    </tr>
+    
+  </tbody>
+  </table>
+  </div>
+  </div>
+  <h6 class="cover-heading">Broker in Charge</h5>
+  <div class="row">
+    <div class="col-md-12">
+  <table class="table">
+  <tbody>
+    <tr>
+        
+    <td>First Name</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <%=user.broker.first_name? user.broker.first_name : 'User'%>
+      </div>
+    </td>
+  </tr>
+    <tr>
+      
+      <td>Last Name</td>
+      <td>
+        <div class="col-md-6 mb-3">
+          <%=user.broker.last_name%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td>
+        <div class="col-md-6 mb-3">
+          <%=user.broker.address%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td>
+      <div class="col-md-6 mb-3">
+        <%=user.broker.city%>
+      </div>
+     
+      </td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td>
+        <div class="col-md-6 mb-3">
+          <%=user.broker.state%>
+        </div>
+      </td>
+      
+    </tr>
+    <tr>
+    <td>Zip</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <%=user.broker.zip%>
+      </div>
+    </td>
+    
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+     <a href="/subconfig" class="btn btn-primary" name="submit" value="Update information">Update Information</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</main>
+
+<script>
+  $(document).ready(function() {
+      $('#usertable').DataTable();
+  });
+</script>
+<% include ./_layouts/adminfooter.ejs %>
+

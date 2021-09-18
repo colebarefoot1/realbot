@@ -1,0 +1,75 @@
+<% include ./_layouts/adminheader.ejs %>
+<main class="p-2" role="main">
+  <p class="cover-heading">Let’s get your bot up and running! We just need
+  a little bit of information. Please confirm the
+  information below:</p>
+  <form method="post" name="userconfirm" action="/userconfirm">
+<table class="table">
+<tbody>
+  <tr>  
+    <td>First Name *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="first_name" value="<%=user.facebook.first_name%>" required/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Last Name *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="last_name" value="<%=user.facebook.last_name%>" required/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Email *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="email" value="<%=user.facebook.email%>" required/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Cell Phone Number(9 digits)*</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="tel" name="phone_number" value="<%=user.subscriber.phone_number%>" required pattern=".{9,}"/>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <p>What do you want to name your bot? Think of
+        something classy like "Matt":</p>
+    </td>
+  </tr>
+  <tr>
+    <td>Bot Name *</td>
+    <td>
+      <div class="col-md-6 mb-3">
+        <input type="text" name="botname" value="<%=user.subscriber.botname%>" required/>
+      </div>
+    </td>
+  </tr>
+
+</tbody>
+</table>
+<div class="row">
+  <div class="col-md-12 text-center">
+   <input type="submit" class="btn btn-primary" name="submit" value="Submit"/>
+  </div>
+</div>
+</form>
+
+<script>
+$(document).ready(function() {
+  
+
+});
+</script>
+
+</main>
+<% include ./_layouts/adminfooter.ejs %>
+

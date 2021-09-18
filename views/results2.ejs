@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html class="desktop">
+
+<head>
+    <title>
+        <%= streetNumberText %>
+            <%= streetName %>,
+                <%= city %>,
+                    <%= state %>
+                        <%= postalCode %> (
+                            <%- photos.length %> Photos) MLS#
+                                <%= listingId %> - RealBot</title>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://maps.googleapis.com">
+    <link rel="preload" href="/public/css/fonts/roboto-light-webfont.woff" as="font" type="font/woff">
+    <link rel="preload" href="/public/css/fonts/roboto-regular-webfont.woff" as="font" type="font/woff">
+    <link rel="preload" href="/public/css/fonts/rbfont.ttf?ez8vuh" as="font" type="font/ttf">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/public/vendor/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/public/vendor/slick/slick-theme.css">
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+
+    <link href="/public/css/main.css" type="text/css" rel="stylesheet">
+    <meta name="background-color" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .slider {
+            width: 100%;
+            margin: 1px auto;
+        }
+
+        .slick-slide {
+            margin: 0px 0px;
+        }
+
+        .slick-slide img {
+            width: 100%;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+
+
+        .slick-slide {
+            transition: all ease-in-out .3s;
+            opacity: 1;
+        }
+
+        .slick-active {
+            opacity: 1;
+        }
+
+        .slick-current {
+            opacity: 1;
+        }
+
+        .slick {
+            visibility: hidden;
+        }
+
+        .slick-slider .slick-slide {
+            display: none;
+        }
+
+        .slick-slider .slick-slide:first-child {
+            display: block;
+        }
+
+        .slick-initialized.slick-slider .slick-slide,
+        .slick-initialized.slick-slider .slick-slide:first-child {
+            display: block;
+
+            visibility: visible;
+            opacity: 1;
+
+        }
+
+
+        .modal-dialog {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            border-radius: 0;
+        }
+
+        #modalDesktopPhotos {
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            top: 25%;
+        }
+
+        .slick {
+            width: calc(100%-60px) !important;
+            height: calc(100%-20px) !important;
+            visibility: visible !important;
+            position: absolute !important;
+            top: 10px !important;
+            bottom: 10px !important;
+            left: 30px !important;
+            right: 30px !important;
+        }
+
+        .slick-list {
+            position: absolute !important;
+            bottom: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+        }
+
+        .slick-track {
+            position: absolute;
+            height: 100% !important;
+        }
+
+        #modalMobilePhotos {
+            width: 100%;
+            height: 95%;
+            top: 2.5%;
+            display: none;
+        }
+
+        .image-modal {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body class="flat desktop   v17458" id="body" utmsection='body' data-ga-page="responsivedpp">
+    <div id="header" class="menu white " section="Header" utmsection='header'>
+
+        <div class="menu-header">
+
+
+        </div>
+
+    </div>
+
+
+    <div id="dppPage" class="dpppage">
+
+    </div>
+    <script type="text/javascript">
+        var startTime = new Date();
+        function recordLoadingTime(event) {
+            var currentTarget = event.currentTarget;
+            var duration = new Date() - startTime;
+            currentTarget.setAttribute('data-ga-record', duration);
+        }
+    </script>
+    <div id="topcontent" class="dpp-topcontent showPattern" onchange="_">
+        <div id="dppTags" class=" dpp-topcontent-bar top-left hasPhotos">
+            <button type="button" class="btn btn-success btn-sm">For Sale</button>
+
+        </div>
+
+        <div class="dpp-topcontent-bar top-right">
+            <button type="button" class="btn btn-primary btn-sm">
+                <%- photos.length %> Photos</button>
+
+        </div>
+
+        <div class="dpp-topcontent-carousel variable slider">
+            <% for(var i = 0; i < photos.length; ++i) 
+                    {%>
+                <div>
+                    <img src="<%- photos[i]%>" alt="First slide" class="image-topcontent">
+                </div>
+
+                <%} %>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="/public/vendor/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+
+            $(".variable").slick({
+                dots: false,
+                infinite: true,
+                variableWidth: true,
+                slidesToShow: 2,
+                autoplay: true,
+                autoplaySpeed: 1500,
+            });
+
+        });
+    </script>
+
+
+    <div class="layout">
+        <div class="layout-right">
+            <div class="section first">
+                <div class="panel">
+                    <div class="flex middle">
+                        <div>
+                            <div id="dppinfo">
+                                <div class="hidden-md hidden-lg">
+                                    <div class="dpp-price" itemprop='offers' itemscope itemtype='http://schema.org/Offer'>
+                                        <sub class="hidden-xs">FOR SALE</sub>
+                                        <meta itemprop='priceCurrency' content='USD' />
+                                        <meta itemprop="price" content="<%= listPrice %>" />
+                                        <meta itemprop="availability" content="http://schema.org/InStock">
+                                        <meta itemprop="validFrom" content="">
+                                        <a rel="nofollow" href="#mgCal" data-keepwatchwidth="true">
+                                            <span>
+                                                <%= listPrice %>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="dpp-title" section="TitleInfo">
+                                    <div class="dpp-title-text" itemprop="address" itemscope itemtype="http://schema.org/SingleFamilyResidence">
+                                        <span style="display:none;" itemprop="geo" itemscope="" itemtype="http://schema.org/GeoCoordinates">
+                                            <meta itemprop="map" content="" />
+                                            <meta itemprop="name" content="For Sale: 2204 Shenandoah Ave Charlotte, NC 28205" />
+                                            <meta itemprop="url" content="" />
+                                            <meta itemprop="latitude" content="35.215266" />
+                                            <meta itemprop="longitude" content="-80.81065" />
+                                        </span>
+                                        <h1 class="dpp-title-address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                            <span itemprop="streetAddress">
+                                                <%= streetNumberText %>
+                                                    <%= streetName %>
+                                            </span>
+                                            <span itemprop="addressLocality">
+                                                <%= city%>,
+                                            </span>
+                                            <span itemprop="addressRegion">
+                                                <%= state%>
+                                            </span>
+                                            <span itemprop="postalCode">
+                                                <%= postalCode %>
+                                            </span>
+                                        </h1>
+                                        <div class="hidden-md hidden-lg">
+                                            <div class="dpp-basic">
+                                                <div>
+                                                    <%= bedrooms %> Bd
+                                                </div>
+                                                <div>
+                                                    <%= bathsFull %> Ba
+                                                </div>
+                                                <div>
+                                                    <%= area %> Sqft
+                                                </div>
+                                                <div>
+                                                    <%= daysOnMarket %> Days
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="flex-fixed dpp-flex-panel">
+
+
+                            <div class="hidden-md hidden-lg">
+
+                                <button type="button" class="btn green" id="btn_collectUser">
+                                    Request Information 1
+                                </button>
+                                <div class="blank15"></div>
+                            </div>
+                            <div id="dppButtons" class="dpp-buttons" section="ButtonsList">
+                                <div>
+                                    <a data-toggle="modal" data-target="#exampleModalLong" href="#">
+                                        <i class="icon-map-o"></i>
+                                        <span>Map</span>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a data-toggle="modal" data-target="#exampleModalLong" href="#">
+                                        <i class="icon-envelope-o"></i>
+                                        <span>Share</span>
+                                    </a>
+                                </div>
+                                <div id="tdSaveFav">
+                                    <a href="" class="">
+                                        <span data-addtext="Saved" data-removetext="Save">
+                                            <i class="icon-heart-o"></i>
+                                            Save
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="houseDesc" class="paragraph" section="Description">
+                        <%= remarks %>
+                    </div>
+                    <div id="dppField">
+                        <div class="dpp-column revert" section="BaseInfo">
+                            <ul class="flex-gs left">
+                                <li class="flex-xs-12 flex-sm-6 flex-md-4">
+                                    <a href="#"></a>
+                                    <%= subdivision %>
+                                        </a>
+                                </li>
+
+                                <li class="flex-xs-12 flex-sm-6 flex-md-4">
+
+                                    <% if  (type == 'RES') {%>
+                                        Single Family
+                                        <% } else if(type == 'CONDO') {%>
+                                            Condo
+                                            <% } %>
+
+                                </li>
+                                <li class="flex-xs-12 flex-sm-6 flex-md-4">
+                                    Built in
+                                    <%= yearBuilt %>
+                                </li>
+                                <li class="flex-xs-12 flex-sm-6 flex-md-4">
+                                    <%= lotSizeArea %> Sqft Lot
+                                </li>
+                                <li class="flex-xs-12 flex-sm-6 flex-md-4">
+                                    $
+                                    <%= fee %> HOA Fee
+                                </li>
+                                <li class="flex-xs-12 flex-sm-6 flex-md-4">
+                                    <%= daysOnMarket %> Days on Market
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="dppInfolist" section="InfoList" class="">
+                        <div class="dpp-infolist">
+                            <ul>
+                                <li>
+                                    <span>MLS#
+                                        <%= listingId %>
+                                    </span>
+                                    provided by
+                                    <span>
+                                        <%= agent_firstname %>
+                                            <%= agent_lastname %> of</span>
+                                    <span>
+                                        <%= servingName %>
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>We
+                                    <span>last checked
+                                        <%= originatingSystemName  %>
+                                            <img class="img-mlslogo" data-img=""> for new data </span> 3 minutes ago
+                                </li>
+                                <li>
+                                    <span>
+                                        <%= originatingSystemName  %> last updated this listing</span> 2 weeks ago</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex row-reverse">
+                        <div class="flex-fixed dpp-flex-panel hidden-xs">
+                            <button type="button" class="btn green" data-toggle="modal" data-target="#exampleModalLong">
+                                Request Information 3
+                            </button>
+                        </div>
+                        <div>
+                            <div class="footer-link">
+                                <a href="#rb-map-item" data-toggle="collapse">
+                                    <i class="icon-map-o"></i>
+                                    <span>View
+                                        <%= streetNumberText %>
+                                            <%= streetName %> on Map</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="collapse" id="rb-map-item">
+                <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDNbeBBEfbag8gETgFnvCNFAmQ9gV5Yw7c&q=<%- lat %>,<%- lng %>"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="section" id="houseFeaturesField" data-ga-scroll>
+                <div class="panel" section="HouseFeature">
+                    <a href="javascript:;" class="h1 " data-ga-name="ExpandLink" data-ga-params='{"linkType": "text"}' data-collapse data-target="#featureInfo">
+                        <h2>
+                            Home Features
+                            <span class="subtitle">
+                                <%= full %>
+                            </span>
+                        </h2>
+                    </a>
+                    <div id="featureInfo" style="display:block;">
+                        <div class="dpp-feature">
+                            <div class="dpp-feature-item clearfix ">
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Status:</span>
+                                    <span>
+                                        <%= status %>
+                                    </span>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Prop Type:</span>
+                                    <% if  (type == 'RES') {%>
+                                        Single Family
+                                        <% } else if(type == 'CONDO') {%>
+                                            Condo
+                                            <% } %>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Property Sub Type:</span>
+                                    <span>
+                                        <% subType %>
+                                    </span>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Lot Features:</span>
+                                    <span>Level, Open/Cleared</span>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Lot Size Area:</span>
+                                    <span>0.17</span>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Special Listing Conditions:</span>
+                                    <span>None</span>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <span>Virtual Tour:</span>
+                                    <a href="<%- virtualTourUrl %>" rel="nofollow">External Link</a>
+                                </div>
+                            </div>
+
+                            <div class="collapse" id="rb-feature-item">
+                                <div class="dpp-feature-item clearfix ">
+                                    <div class="col-xs-12 f4">Interior</div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Bedrooms Total:</span>
+                                        <span>
+                                            <%= bathsFull %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Flooring:</span>
+                                        <span>
+                                            <%= flooring %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Interior Features:</span>
+                                        <span>
+                                            <%= interiorFeatures %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="dpp-feature-item clearfix ">
+                                    <div class="col-xs-12 f4">Exterior</div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Exterior Construction:</span>
+                                        <span>
+                                            <% exteriorFeatures %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Foundation Details:</span>
+                                        <span>
+                                            <% foundation %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="dpp-feature-item clearfix ">
+                                    <div class="col-xs-12 f4">Amenities / Utilities</div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Heating:</span>
+                                        <span>
+                                            <% heating %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Fireplace Description:</span>
+                                        <span>
+                                            <% fireplaces %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Sewer:</span>
+                                        <span></span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Exterior Features:</span>
+                                        <span>
+                                            <% foundation %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Community Features:</span>
+                                        <span>
+                                            <% amenities %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="dpp-feature-item clearfix ">
+                                    <div class="col-xs-12 f4">Location</div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Middle School:</span>
+                                        <span>
+                                            <%= middleSchool %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>Elementary School:</span>
+                                        <span>
+                                            <%= elementarySchool %>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span>High School:</span>
+                                        <span>
+                                            <%= highSchool %>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <a href="#rb-feature-item" data-toggle="collapse" onclick="if(this.innerText == 'Show More'){this.innerText='See Less'} else{this.innerText='Show More'}">Show More</a>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="inlinehoteadPanel">
+                <div class="panel">
+                    <div class="dpp-hotlead-panel">
+
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comps">
+                <div class="section" id="comparableHomesField" data-ga-scroll>
+
+                </div>
+            </div>
+            <div class="section full">
+
+            </div>
+
+            <div class="section full hidden-xs hidden-sm">
+            </div>
+
+
+
+        </div>
+        <div class="layout-left">
+            <div class="hidden-xs hidden-sm">
+                <div class="dpp-fixedsection" id="submenu" data-stick data-top="420">
+                    <div id="dpphotleadOverlay" class="dpp-hotlead-overlay"></div>
+                    <div class="dpp-hotlead " id="dpphotlead" section="LeadForm">
+                        <div class="dpp-hotlead-title" itemscope itemtype='http://schema.org/Product'>
+                            <meta itemprop="name" content="2204 Shenandoah Ave Charlotte, NC 28205" />
+                            <div class="dpp-price" itemprop='offers' itemscope itemtype='http://schema.org/Offer'>
+                                <sub class="hidden-xs">FOR SALE</sub>
+                                <meta itemprop='priceCurrency' content='USD' />
+                                <meta itemprop="price" content="619990" />
+                                <meta itemprop="availability" content="http://schema.org/InStock">
+                                <meta itemprop="validFrom" content="">
+                                <a rel="nofollow" href="#mgCal" data-keepwatchwidth="true">
+                                    <span>
+                                        <%= listPrice %>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="dpp-basic">
+                                <div>
+                                    <%= bedrooms %> Bd
+                                </div>
+                                <div>
+                                    <%= bathsFull %> Ba
+                                </div>
+                                <div>
+                                    <%= property_area %> Sqft
+                                </div>
+                                <div>
+                                    <%= daysOnMarket %> Days
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dpp-hotlead-form">
+                            <table class="dpp-agentfield" cellpadding="0" cellspacing="0" width="100%" section="AgentInfo" data-agent-tip>
+                                <colgroup>
+                                    <col width="60" />
+                                    <col/>
+                                </colgroup>
+                                <tr>
+                                    <td>
+                                        <img src="/public/img/lt_headshot.jpg" alt="">
+                                    </td>
+                                    <td class="f4">
+                                        <div class="f2">
+                                            <%= brokerage_brokerageName %>
+                                        </div>
+                                        <p>
+                                            Contact
+                                            <%= fb_sub_agentfname %>
+                                        </p>
+                                        <span class="dpp-rates">
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+                                            <i class="icon-star"></i>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <form class="form-group" form-group method="post" role="form" data-toggle="validator" action="/postactivity" id="activity_form">
+                                <input class="form-control-lg" id="FixedHotlead_email" type="email" name="email" autocomplete="email" placeholder="E-Mail"
+                                    value="" />
+                                <input class="form-control-lg" type="text" id="FixedHotlead_name" name="name" placeholder="Name" autocomplete="name" value=""
+                                    data-validate="required" />
+                                <input class="form-control-lg" id="FixedHotlead_phonenum" type="tel" name="phoneNum" autocomplete="tel-national" placeholder="Phone number"
+                                    value="" data-validate="required,phone" />
+                                <select class="form-control-lg" name="preferredmethod" id="FixedHotlead_preferredmethod" data-validate="required,phone">
+                                    <option value="" disabled selected hidden>Preferred Contact Method</option>
+                                    <option value="Phone">Phone</option>
+                                    <option value="Email">Email</option>
+                                </select>
+                                <textarea class="form-control-lg" id="FixedHotlead_txtComments" data-validate="required" name="comment" placeholder="Comments"
+                                    maxlength="200">I am interested in <%= full %>. </textarea>
+                                <p id="FixedHotlead_txtResponse" style="text-align: center"></p>
+                                <div class="text-disclaimer" data-formdisclaimer></div>
+                                <input name="listingId" value="98c5b54d-4d45-4801-b45d-0b45696b09eb" type="hidden" />
+                                <input name="propertyId" value="259d9985-e864-4d57-be98-1d31698bb666" type="hidden" />
+                                <input name="propertyUrl" type="hidden" value="home/2204-shenandoah-ave-charlotte-nc-28205-411_3325284">
+                                <input name="estimatePrice" value="619,990" type="hidden" />
+                                <input name="propertyAddress" id="FixedHotlead_propertyAddress" value="2204 Shenandoah Ave Charlotte, NC 28205" type="hidden"
+                                />
+                                <input name="type" value="FixedHotleadInResponsiveDPP" type="hidden" />
+                                <input name="requestAgentId" value="" type="hidden" />
+                                <input name="cityCode" type="hidden" value="19882">
+                                <input name="scheduleDate" type="hidden">
+                                <input name="mlsId" id="FixedHotlead_mlsId" type="hidden" value="<%=mlsId%>">
+                                <input name="user_Id" type="hidden" value="<%=user_Id%>">
+                                <input name="pageID" type="hidden" value="<%=pageID%>">
+                            </form>
+                            <div class="dpp-hotlead-footer" section="StickFooter">
+
+                                <button type="button" id='btnSubmit' name="submit" class="btn green">
+                                    Contact
+                                    <%= fb_sub_agentfname %>
+                                </button>
+
+                                <button type="button" id='btnContinue' name="submit" class="btn green" style="display:none">
+                                    Continue
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-sticky data-top="175" data-holdheight="700">
+            <!-- <div class="section full">
+                <div data-ads="dppads0" style="height:250px; width:300px; margin: 0 auto;"></div>
+            </div>
+            <div class="panel" section="AwsomeHouse">
+            </div>
+            <div class="footer-link">
+            </div> -->
+        </div>
+        <div class="layout-right">
+            <div class="section">
+
+
+            </div>
+
+
+
+            <footer class="footer text-light">
+                <div class="callagentcontent text-center">
+                    Give
+                    <%= fb_sub_agentfname %> a call today!
+                        <br class="hidden-sm hidden-md hidden-lg">
+                        <span class="hidden-xs">—</span>
+                        <%= sub_agentPhoneNum %>
+                </div>
+
+                <div class="copyright">
+                    <div class="gs-fixed">
+                        <div class="row">
+                            <div class="col-xs-12" id="footerDisclaimer">
+                                <p class="text-mls-disclaimer">
+                                    Information deemed reliable but not guaranteed to be accurate. Listing information updated daily.&nbsp;
+                                    <a href="https://www.realbot.us/policy/">Terms of use & Privacy Policy.</a>
+                                    Copyright © 2018 Ignite Technologies, Inc. dba Realbot.us All rights reserved.
+                                </p>
+                                <p class="text-mls-disclaimer">
+                                    <!--image below is place holder.. need to update-->
+                                    The multiple listing information is provided by
+                                    <img class="img-mlslogo" data-img="/public/img/cmls.png">
+                                    <%= originatingSystemName %>. Copyright © 2018
+                                        <%= originatingSystemName %>,Inc. All Rights Reserved.
+                                            <%= disclaimer %> This information should be independently verified if any person intends to engage
+                                                in a transaction in reliance upon it. The information provided is for consumers'
+                                                personal, non-commercial use and may not be used for any purpose other than
+                                                to identify prospective properties consumers may be interested in purchasing.
+                                                Some or all of the listings displayed may not belong to the firm whose web
+                                                site is being visited. Listing information updated daily. This listing was
+                                                retrieved on June 12, 2018 9:58 AM PST.
+                                                <br/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+            <!-- Modal for feature coming soon -->
+            <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Coming Soon</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            We are working hard to bring you this feature soon!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" id="modalCollectUserInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-group" form-group method="post" role="form" data-toggle="validator" action="/postactivity" id="activity1_form">
+                                <input class="form-control-lg" id="Modal_FixedHotlead_email" type="email" name="email" autocomplete="email" placeholder="E-Mail"
+                                    value="" />
+                                <input class="form-control-lg" type="text" id="Modal_FixedHotlead_name" name="name" placeholder="Name" autocomplete="name"
+                                    value="" data-validate="required" />
+                                <input class="form-control-lg" id="Modal_FixedHotlead_phonenum" type="tel" name="phoneNum" autocomplete="tel-national" placeholder="Phone number"
+                                    value="" data-validate="required,phone" />
+                                <select class="form-control-lg" name="preferredmethod" id="Modal_FixedHotlead_preferredmethod" data-validate="required,phone">
+                                    <option value="" disabled selected hidden>Preferred Contact Method</option>
+                                    <option value="Phone">Phone</option>
+                                    <option value="Email">Email</option>
+                                </select>
+                                <textarea class="form-control-lg" id="Modal_FixedHotlead_txtComments" data-validate="required" name="comment" placeholder="Comments"
+                                    maxlength="200">I am interested in <%= full %>. </textarea>
+                                <p id="Modal_FixedHotlead_txtResponse" style="text-align: center"></p>
+                                <div class="text-disclaimer" data-formdisclaimer></div>
+                                <input name="listingId" value="98c5b54d-4d45-4801-b45d-0b45696b09eb" type="hidden" />
+                                <input name="propertyId" value="259d9985-e864-4d57-be98-1d31698bb666" type="hidden" />
+                                <input name="propertyUrl" type="hidden" value="home/2204-shenandoah-ave-charlotte-nc-28205-411_3325284">
+                                <input name="estimatePrice" value="619,990" type="hidden" />
+                                <input name="propertyAddress" id="Modal_FixedHotlead_propertyAddress" value="2204 Shenandoah Ave Charlotte, NC 28205" type="hidden"
+                                />
+                                <input name="type" value="FixedHotleadInResponsiveDPP" type="hidden" />
+                                <input name="requestAgentId" value="" type="hidden" />
+                                <input name="cityCode" type="hidden" value="19882">
+                                <input name="scheduleDate" type="hidden">
+                                <input name="mlsId" id="Modal_FixedHotlead_mlsId" type="hidden" value="<%=mlsId%>">
+                                <input name="user_Id" type="hidden" value="<%=user_Id%>">
+                                <input name="pageID" type="hidden" value="<%=pageID%>">
+                            </form>
+
+                            <button type="button" id='btnModalSubmit' name="submit" class="btn green">
+                                Contact
+                                <%= fb_sub_agentfname %>
+                            </button>
+
+                            <button type="button" id='btnModalContinue' name="submit" class="btn green" style="display:none">
+                                Continue
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal" id="modalMobilePhotos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body" style="padding:0px !important; display: flex; align-items: center">
+
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+
+                                    <% for(var i = 0; i < photos.length; ++i) 
+                                  {%>
+                                        <%if (i== 0) { %>
+                                            <div class="carousel-item active">
+                                                <img src="<%- photos[i]%>" alt="First slide" style="object-fit: cover;width: 100%;">
+                                                
+                                            </div>
+                                            <% } %>
+                                                <%if (i!= 0) { %>
+                                                    <div class="carousel-item">
+                                                        <img src="<%- photos[i]%>" alt="First slide" style="object-fit: cover; width: 100%;">
+                                                    </div>
+                                                    <%} %>
+                                                        <%} %>
+
+                                </div>
+
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+
+                            </div>
+                            <div style="position: absolute;
+                            right: 0;
+                            top: 0;
+                            padding: 5px;
+                            background: #22222222;
+                            width: 100%;
+                            display: flex;
+                            justify-content: flex-end">
+                                <img src="http://res.cloudinary.com/dg9ae8hup/image/upload/v1532617225/ico_close.png" data-dismiss="modal" aria-label="Close"
+                                />
+                            </div>
+
+                            <button type="button" name="submit" class="btn orange" id="btnRequestInfo" style="position: absolute;
+                              left: 50%;
+                              transform: translate(-50%, -50%);
+                              bottom: 20px;">
+                                Request Info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal" id="modalDesktopPhotos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Photos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="padding-left:30px; padding-right:30px;">
+                            <div class="slick" id="slick_modal_photos">
+                                <% for(var i = 0; i < photos.length; ++i) 
+                                {%>
+                                    <div>
+                                        <img src="<%- photos[i]%>" alt="First slide" class="image-modal" style="position: absolute; object-fit: contain" />
+                                    </div>
+
+                                    <%} %>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+
+<!-- <script type="text/javascript" src="/public/js/jquery.all.min.js" crossorigin="anonymous" async="true" />
+<script type="text/javascript" src="/public/js/underscore-min.js" crossorigin="anonymous" async="true" />
+<script type="text/javascript" src="/public/js/jquery.ui.min.js" crossorigin="anonymous" async="true" /> -->
+
+<script>
+    console.log('resulst2');
+    console.log("<%= full  %>");
+
+    var full = "<%= full  %>";
+    console.log(full);
+    $(document).ready(function () {
+        $('#FixedHotlead_preferredmethod').val('');
+        console.log('onDeviceReady');
+        $('#btnSubmit').click(function (e) {
+            console.log($('#FixedHotlead_txtComments').val());
+
+            if (!validateEmail($('#FixedHotlead_email').val())) {
+                alert('please input valid email');
+                return;
+            }
+
+            if ($('#FixedHotlead_name').val() === '') {
+                alert('please input name');
+                return;
+            }
+
+            if ($('#FixedHotlead_phonenum').val() === '') {
+                alert('please input phone number');
+                return;
+            }
+
+            if ($('#FixedHotlead_preferredmethod').val() === null) {
+                alert('please input Preferred method');
+                return;
+            }
+
+
+            if ($('#FixedHotlead_txtComments').val() === '') {
+                alert('please input comments');
+                return;
+            }
+
+            var data = {
+                name: $('#FixedHotlead_name').val(),
+                phoneNum: $('#FixedHotlead_phonenum').val(),
+                message: $('#FixedHotlead_txtComments').val(),
+                preferredmethod: $('#FixedHotlead_preferredmethod').val(),
+                propertyAddress: $('#FixedHotlead_propertyAddress').val(),
+                mlsId: $('#FixedHotlead_mlsId').val()
+            };
+
+            console.log(data);
+
+            $.ajax({
+                async: true,
+                data: data,
+                type: "POST",
+                url: "https://" + window.location.host + '/postactivity',
+                success: function (response) {
+                    $('#FixedHotlead_email').hide();
+                    $('#FixedHotlead_name').hide();
+                    $('#FixedHotlead_phonenum').hide();
+                    $('#FixedHotlead_preferredmethod').hide();
+                    $('#FixedHotlead_txtComments').hide();
+                    $('#FixedHotlead_txtResponse').text(response.message);
+                    $('#btnContinue').show();
+                    $('#btnSubmit').hide();
+                }
+            });
+        });
+
+        $('#btnModalSubmit').click(function (e) {
+            console.log('submit');
+
+            if (!validateEmail($('#Modal_FixedHotlead_email').val())) {
+                alert('please input valid email');
+                return;
+            }
+
+            if ($('#Modal_FixedHotlead_name').val() === '') {
+                alert('please input name');
+                return;
+            }
+
+            if ($('#Modal_FixedHotlead_phonenum').val() === '') {
+                alert('please input phone number');
+                return;
+            }
+
+            if ($('#Modal_FixedHotlead_preferredmethod').val() === null) {
+                alert('please input Preferred method');
+                return;
+            }
+
+            if ($('#Modal_FixedHotlead_txtComments').val() === '') {
+                alert('please input comments');
+                return;
+            }
+
+            var data = {
+                name: $('#Modal_FixedHotlead_name').val(),
+                phoneNum: $('#Modal_FixedHotlead_phonenum').val(),
+                message: $('#Modal_FixedHotlead_txtComments').val(),
+                preferredmethod: $('#Modal_FixedHotlead_preferredmethod').val(),
+                propertyAddress: $('#Modal_FixedHotlead_propertyAddress').val(),
+                mlsId: $('#Modal_FixedHotlead_mlsId').val()
+            };
+            
+            console.log(data);
+            $.ajax({
+                async: true,
+                data: data,
+                type: "POST",
+                url: "https://" + window.location.host + '/postactivity',
+                success: function (response) {
+                    console.log(response);
+                    $('#Modal_FixedHotlead_email').hide();
+                    $('#Modal_FixedHotlead_name').hide();
+                    $('#Modal_FixedHotlead_phonenum').hide();
+                    $('#Modal_FixedHotlead_preferredmethod').hide();
+                    $('#Modal_FixedHotlead_txtComments').hide();
+                    $('#Modal_FixedHotlead_txtResponse').text(response.message);
+                    $('#btnModalContinue').show();
+                    $('#btnModalSubmit').hide();
+                }
+            });
+        });
+
+        $('#btnModalContinue').click(function (e) {
+            $('#Modal_FixedHotlead_email').val('');
+            $('#Modal_FixedHotlead_name').val('');
+            $('#Modal_FixedHotlead_phonenum').val('');
+            $('#Modal_FixedHotlead_preferredmethod').val('');
+            $('#Modal_FixedHotlead_txtComments').val("I am interested in " + full);
+            $('#Modal_FixedHotlead_txtResponse').text('');
+
+            $('#Modal_FixedHotlead_email').show();
+            $('#Modal_FixedHotlead_name').show();
+            $('#Modal_FixedHotlead_phonenum').show();
+            $('#Modal_FixedHotlead_preferredmethod').show();
+            $('#Modal_FixedHotlead_txtComments').show();
+
+             $('#modalCollectUserInfo').modal('hide');
+            $('#btnModalContinue').hide();
+            $('#btnModalSubmit').show();
+        });
+
+        $('#btnContinue').click(function (e) {
+
+            $('#FixedHotlead_email').val('');
+            $('#FixedHotlead_name').val('');
+            $('#FixedHotlead_phonenum').val('');
+            $('#FixedHotlead_preferredmethod').val('');
+            $('#FixedHotlead_txtComments').val("I am interested in " + full);
+            $('#FixedHotlead_txtResponse').text('');
+
+            $('#FixedHotlead_email').show();
+            $('#FixedHotlead_name').show();
+            $('#FixedHotlead_phonenum').show();
+            $('#FixedHotlead_preferredmethod').show();
+            $('#FixedHotlead_txtComments').show();
+
+
+            $('#btnContinue').hide();
+            $('#btnSubmit').show();
+        });
+
+        $('#btnRequestInfo').on('click', function () {
+            $('#modalMobilePhotos').modal('hide');
+            $('#modalCollectUserInfo').modal('show');
+        });
+
+        $(document).on("click", "#btn_collectUser", function () {
+            // alert("click bound to document listening for #test-element");
+            $('#modalCollectUserInfo').modal('show');
+        });
+
+
+        $('.image-topcontent').on('click', function () {
+
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            var position = $(this).parent().parent().parent().attr('data-slick-index');
+            console.log($(this).parent().parent().parent().attr('data-slick-index'));
+
+            if (isMobile) {
+                $('#modalMobilePhotos').modal('show');
+                $('#carouselExampleControls').carousel(parseInt(position));
+            } else {
+                try {
+                    $('.slick').slick({
+                        infinite: false,
+                        speed: 1500,
+                        fade: true,
+                        cssEase: 'linear',
+                        dots: false,
+                        autoplay: false,
+                        autoplaySpeed: 500,
+                        prevArrow: '<button type="button" class="slick-prev"></button>',
+                        nextArrow: '<button type="button" class="slick-next"></button>',
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+
+                $('#modalDesktopPhotos').modal('show');
+
+                $('.slick').slick('slickGoTo', position, true);
+                $('.slick').resize();
+                console.log('desktop');
+            }
+        });
+
+
+        $('.slick').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+            console.log('afterChange');
+            $("#slick_modal_photos").css("visibility", "visible");
+        });
+
+
+        $('#modalDesktopPhotos').on('hidden.bs.modal', function () {
+            // do something…
+            console.log('modalDesktopPhotos is Hidden');
+        })
+
+    });
+
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+
+</script>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 300 200" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Movoto Loading Photo</title>
+    <desc>Movoto Loading Photo by Jason Sutherland</desc>
+    <defs></defs>
+    <g id="loading-photo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#DBE9F9" x="-9" y="-3" width="320" height="205"></rect>
+        <path d="M133,66 L133,71.5714286 L166,39 L243,115 L228.716086,115 L228.789383,115.071789 L229.036112,198.146998 C230.673967,198.146998 232,199.356913 232,200.848545 L232,204 L100.868675,204 L100.868675,200.848545 C100.868675,200.455402 100.962117,200.083282 101.128002,199.746903 L-11,199.746903 L-11,196.596499 C-11,195.104866 -9.67396705,193.896003 -7.74108767,193.896003 L-7.74108767,80.2523126 L120,80.2523126 L120,65.9993666 C118.337953,65.9662133 117,64.6358261 117,63.0007729 L117,58.0002899 C117,56.3433816 118.372198,55 120.063562,55 L133.936438,55 C135.628888,55 137,56.3433816 137,58.0002899 L137,63.0007729 C137,64.6566184 135.628888,66 133.936438,66 L133,66 Z" id="Combined-Shape" fill-opacity="0.4" fill="#4A90E2" opacity="0.4"></path>
+    </g>
+</svg>
